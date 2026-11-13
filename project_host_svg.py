@@ -10,8 +10,10 @@ Original file is located at
 import streamlit as st
 import os
 
-# Gunakan relative path (karena file SVG sekarang satu folder dengan app.py)
-svg_file_path = "grafik claim monitoring (1).svg"
+svg_files = [
+    "grafik claim monitoring (1).svg",
+    "grafik claim monitoring (2).svg"
+]
 
 def render_svg(file_path):
     # Mengecek apakah file ada
@@ -23,4 +25,9 @@ def render_svg(file_path):
         st.error(f"File tidak ditemukan: {file_path}")
 
 st.title("Grafik Claim Monitoring")
-render_svg(svg_file_path)
+
+# Membuat dropdown menu
+pilihan = st.selectbox("Pilih Visualisasi:", svg_files)
+
+# Render SVG yang dipilih
+render_svg(pilihan)
