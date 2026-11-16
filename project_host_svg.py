@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 svg_files = {"Grafik Line Chart Aging":"grafik claim monitoring (1).svg",
-    "Grafik Bar Chart Provider Pending":"grafik claim monitoring (2).svg"}
+    "Grafik Pie Chart Provider Pending":"grafik claim monitoring (2).svg"}
 
 
 def render_svg(file_path):
@@ -18,6 +18,11 @@ st.title("Grafik Claim Monitoring")
 
 # Membuat dropdown menu
 pilihan_baru = st.selectbox("Pilih Visualisasi:", list(svg_files.keys()))
+if pilihan baru == "Grafik Line Chart Aging":
+    st.subheader("Aging Claim on Payor")
+else:
+    st.subheader("Percentage Pending on Provider")
+
 pilihan_asli = svg_files[pilihan_baru]
 # Render SVG yang dipilih
 render_svg(pilihan_asli)
