@@ -18,7 +18,7 @@ st.title("Grafik Claim Monitoring")
 
 # Membuat dropdown menu
 pilihan_baru = st.selectbox("Pilih Visualisasi:", list(svg_files.keys()))
-if pilihan baru == "Grafik Line Chart Aging":
+if pilihan_baru == "Grafik Line Chart Aging":
     st.subheader("Aging Claim on Payor")
 else:
     st.subheader("Percentage Pending on Provider")
