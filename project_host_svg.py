@@ -1,10 +1,9 @@
 import streamlit as st
 import os
 
-svg_files = [
-    {"Grafik Line Chart Aging":"grafik claim monitoring (1).svg",
+svg_files = {"Grafik Line Chart Aging":"grafik claim monitoring (1).svg",
     "Grafik Bar Chart Provider Pending":"grafik claim monitoring (2).svg"}
-]
+
 
 def render_svg(file_path):
     # Mengecek apakah file ada
