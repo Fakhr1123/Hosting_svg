@@ -47,14 +47,5 @@ if selected == "Patient Pending (Cashless)":
     df = pd.read_excel("patient_pending.xlsx")
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
-    gb.configure_column("Payor", rowGroup= True, hide= True)
-    gb.configure_column("Provider Name", rowGroup= True, hide= True)
-    gb.configure_grid_options(autoGroupColumnDef={
-        'headerName': 'Payor/Provider',
-        'minWidth': 200,
-        'cellRendererParams': {'suppressCount': False},
-        'filter': True,
-        'floatingFilter': True},
-        groupDefaultExpanded= 1)
     gridOptions = gb.build()
     AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = True)
