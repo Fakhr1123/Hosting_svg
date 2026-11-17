@@ -46,6 +46,15 @@ if selected == "Visualisasi Data Pending (Cashless)":
 if selected == "Patient Pending (Cashless)":
     df = pd.read_excel("patient_pending.xlsx")
     gb = GridOptionsBuilder.from_dataframe(df)
-    gb.configure_default_column(filter = "agTextColumnFilter", floatingFilter= True, resizable = True)
-    gridOptions = gb.build()
-    AgGrid(df, gridOptions = gridOptions, fit_columns_on_grid_load = True)
+    gb.configure_default_column(filter= True, floating= True, resizable = True)
+    gb.configure_column("Payor", rowGroup= True, hide= True)
+    gb.configure_column("Provider Name", rowGroup= True, hide= True)
+    gb.configure_grid_options(autoGroupColumnDef={
+        'headerName': 'Payor/Provider',
+        'minWidth': 200,
+        'cellRenderer': {'suppresCount': False},
+        'filter': True,
+        'floatingFilter': True},
+        groupDefaultExpanded= 1)
+    gridOption = gb.build()
+    AgGrid(df,gridOption = gridOption, fit_columns_on_grid_load = True)
