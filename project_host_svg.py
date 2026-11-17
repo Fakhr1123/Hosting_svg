@@ -48,7 +48,7 @@ if selected == "Patient Pending (Cashless)":
     import pandas as pd
     from cryptography.fernet import Fernet
     
-    key = os.environ.get("EXCEL_SECRET_KEY").encode()
+    key = os.environ.get("EXCEL_RAHASIOOI_KEY").encode()
     cipher = Fernet(key)
     
     with open("patient_pending.enc", "rb") as f:
