@@ -46,6 +46,6 @@ if selected == "Visualisasi Data Pending":
 if selected == "Patient Pending":
     df = pd.read_excel("patient_pending.xlsx")
     gb = GridOptionsBuilder.from_dataframe(df)
-    gb.configure_default_column(filter= agTextColumnFilter, floatingFilter= True, resizable = True)
+    gb.configure_default_column(filter = "agTextColumnFilter", floatingFilter= True, resizable = True)
     gridOption = gb.build()
     AgGrid(df,gridOption = gridOptions, fit_columns_on_grid_load = True)
