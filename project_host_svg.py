@@ -44,9 +44,8 @@ if selected == "Visualisasi Data Pending (Cashless)":
     # Render SVG yang dipilih
     render_svg(pilihan_asli)
 if selected == "Patient Pending (Cashless)":
-    st.set_page_config(layout="wide")
     df = pd.read_excel("patient_pending.xlsx")
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
     gridOptions = gb.build()
-    AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = True)
+    AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = True, fit_columns_on_grid_load = True, height = 650)
