@@ -1,0 +1,7 @@
+# Abaikan semua file Excel dan CSV
+*.xlsx
+*.xls
+*.csv
+
+# Abaikan file sementara saat Excel sedang dibuka
+~$*
