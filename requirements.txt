@@ -2,3 +2,4 @@ streamlit
 streamlit-aggrid
 pandas
 streamlit-option-menu
+openpyxl
