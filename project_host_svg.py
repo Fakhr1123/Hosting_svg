@@ -44,7 +44,17 @@ if selected == "Visualisasi Data Pending (Cashless)":
     # Render SVG yang dipilih
     render_svg(pilihan_asli)
 if selected == "Patient Pending (Cashless)":
-    df = pd.read_excel("patient_pending.xlsx")
+    import io, os
+    import pandas as pd
+    from cryptography.fernet import Fernet
+    
+    key = os.environ.get("EXCEL_SECRET_KEY").encode()
+    cipher = Fernet(key)
+    
+    with open("patient_pending.enc", "rb") as f:
+        decrypted_data = cipher.decrypt(f.read())
+    
+    df = pd.read_excel(io.BytesIO(decrypted_data))
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
     gridOptions = gb.build()
