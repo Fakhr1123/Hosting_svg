@@ -16,7 +16,7 @@ selected = option_menu(
     orientation="vertical"
 )
 
-if selected == "Visualisasi Data Pending":
+if selected == "Visualisasi Data Pending (Cashless)":
 
     svg_files = {"Grafik Line Chart Aging":"grafik claim monitoring (1).svg",
         "Grafik Pie Chart Provider Pending":"grafik claim monitoring (2).svg"}
@@ -43,7 +43,7 @@ if selected == "Visualisasi Data Pending":
     pilihan_asli = svg_files[pilihan_baru]
     # Render SVG yang dipilih
     render_svg(pilihan_asli)
-if selected == "Patient Pending":
+if selected == "Patient Pending (Cashless)":
     df = pd.read_excel("patient_pending.xlsx")
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter = "agTextColumnFilter", floatingFilter= True, resizable = True)
