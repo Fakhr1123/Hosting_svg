@@ -7,7 +7,7 @@ from streamlit_option_menu import option_menu
 st.set_page_config(layout="wide")
 selected = option_menu(
     menu_title="Menu",
-    options=["Visualisasi Data Pending (Cashless)", "Patient Pending (Cashless)"],
+    options=["Visualisasi Data Pending (Cashless)", "Detail Pending (Cashless)"],
     menu_icon="columns-gap",
         icons=[        
         "gear-fill",          
