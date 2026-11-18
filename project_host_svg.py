@@ -4,6 +4,7 @@ import pandas as pd
 from st_aggrid import AgGrid, GridOptionsBuilder
 from streamlit_option_menu import option_menu
 
+st.set_page_config(layout="wide")
 selected = option_menu(
     menu_title="Menu",
     options=["Visualisasi Data Pending (Cashless)", "Patient Pending (Cashless)"],
@@ -58,4 +59,4 @@ if selected == "Patient Pending (Cashless)":
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
     gridOptions = gb.build()
-    AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = True, height = 650, width = 1900)
+    AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = False, height = 650, use_container_width=True)
