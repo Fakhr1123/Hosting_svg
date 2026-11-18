@@ -45,7 +45,7 @@ if selected == "Visualisasi Data Pending (Cashless)":
     pilihan_asli = svg_files[pilihan_baru]
     # Render SVG yang dipilih
     render_svg(pilihan_asli)
-if selected == "Patient Pending (Cashless)":
+if selected == "Detail Pending (Cashless)":
     import io, os
     import pandas as pd
     from cryptography.fernet import Fernet
