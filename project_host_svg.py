@@ -20,7 +20,7 @@ selected = option_menu(
 if selected == "Visualisasi Data Pending (Cashless)":
 
     svg_files = {"Grafik Line Chart Aging":"grafik claim monitoring (1).svg",
-        "Grafik Pie Chart Provider Pending > 3 Hari":"grafik claim monitoring (2).svg",
+        "Grafik Pie Chart Provider Pending > 3 Claim Pending":"grafik claim monitoring (2).svg",
         "Grafik Pending Aging Tertinggi":"grafik claim monitoring (3).svg"}
     
     
