@@ -59,5 +59,6 @@ if selected == "Detail Pending (Cashless)":
     df = pd.read_excel(io.BytesIO(decrypted_data))
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
+    gb.configure_pagination(paginationAutoPageSize=False, PpaginationPageSize=20)
     gridOptions = gb.build()
     AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = False, height = 650, use_container_width=True)
