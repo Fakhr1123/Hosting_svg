@@ -40,7 +40,7 @@ if selected == "Visualisasi Data Pending (Cashless)":
     pilihan_baru = st.selectbox("Pilih Visualisasi:", list(svg_files.keys()))
     if pilihan_baru == "Grafik Line Chart Aging":
         st.subheader("Aging Claim on Payor")
-    elif pilihan_baru == "Grafik Pie Chart Provider Pending":
+    elif pilihan_baru == "Grafik Pie Chart Provider Pending > 3 Claim Pending":
         st.subheader("Percentage Pending on Provider")
     else:
         st.warning("Silahkan cek detail untuk info lebih lanjut")
