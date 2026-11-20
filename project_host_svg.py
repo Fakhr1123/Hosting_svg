@@ -30,6 +30,9 @@ if selected == "Visualisasi Data Pending (Cashless)":
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
                 svg_content = f.read()
+                svg_content = re.sub(r'(<svg[^>]*?)\s+width="[^"]*"', r"\1", svg_content, count=1)
+                svg_content = re.sub(r'(<svg[^>]*?)\s+height="[^"]*"', r"\1", svg_content, count=1)
+                svg_content = svg_content.replace("<svg ", '<svg style="width: 100%; height: auto; display: block;" ', 1)
             st.markdown(svg_content, unsafe_allow_html=True)
         else:
             st.error(f"File tidak ditemukan: {file_path}")
