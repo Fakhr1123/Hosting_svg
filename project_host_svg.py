@@ -3,7 +3,7 @@ import os
 import pandas as pd
 from st_aggrid import AgGrid, GridOptionsBuilder
 from streamlit_option_menu import option_menu
-
+import re
 st.set_page_config(layout="wide")
 selected = option_menu(
     menu_title="Menu",
