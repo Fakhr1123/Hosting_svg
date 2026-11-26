@@ -65,7 +65,7 @@ if selected == "Detail Pending (Cashless)":
     else:
         file_terpilih = st.selectbox("Pilih file Data Pending (.enc)", options=daftar_file_enc)
 
-        @st.cache_date
+        @st.cache_data
         def muat_file_enc(nama_file):
             key = st.secrets["KUNCI_EXCEL"][nama_file]
             cipher = Fernet(key)
