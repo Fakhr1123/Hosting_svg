@@ -77,11 +77,11 @@ if selected == "Detail Pending (Cashless)":
         try:
             df = muat_file_enc(file_terpilih)
             st.success(f"Berhasil memuat: **{file_terpilih}** ({len(df)} baris)")
-            st.dataframe(df, use_container_width=True)
+            gb = GridOptionsBuilder.from_dataframe(df)
+            gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
+            gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
+            gridOptions = gb.build()
+            AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = False, height = 650, use_container_width=True)
         except Exception as e:
             st.error(f"Gagal membuka file {file_terpilih}. Pastikan key sesuai. Detail: {e}")
-    gb = GridOptionsBuilder.from_dataframe(df)
-    gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
-    gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
-    gridOptions = gb.build()
-    AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = False, height = 650, use_container_width=True)
+   
