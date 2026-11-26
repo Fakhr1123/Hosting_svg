@@ -63,7 +63,7 @@ if selected == "Detail Pending (Cashless)":
     if not daftar_file_enc:
         st.warning("Tidak ada file Pending ditemukan")
     else:
-        file_terpilih = st.selectbox("Pilih file Data Pending (.enc)", , options=daftar_file_enc)
+        file_terpilih = st.selectbox("Pilih file Data Pending (.enc)", options=daftar_file_enc)
 
         @st.chace_date
         def muat_file_enc(nama_file):
