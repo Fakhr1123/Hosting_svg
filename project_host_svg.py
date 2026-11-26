@@ -73,7 +73,7 @@ if selected == "Detail Pending (Cashless)":
                 decrypted_data = cipher.decrypt(f.read())
             return pd.read_excel(io.BytesIO(decrypted_data))
             
-         try:
+        try:
             df = muat_data_enc(file_terpilih)
             st.success(f"Berhasil memuat: **{file_terpilih}** ({len(df)} baris)")
             st.dataframe(df, use_container_width=True)
