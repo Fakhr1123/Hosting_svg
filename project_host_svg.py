@@ -71,10 +71,11 @@ if selected == "Detail Pending (Cashless)":
             cipher = Fernet(key)
             with open(nama_file, "rb") as f:
                 decrypted_data = cipher.decrypt(f.read())
+                            
             return pd.read_excel(io.BytesIO(decrypted_data))
             
         try:
-            df = muat_data_enc(file_terpilih)
+            df = muat_file_enc(file_terpilih)
             st.success(f"Berhasil memuat: **{file_terpilih}** ({len(df)} baris)")
             st.dataframe(df, use_container_width=True)
         except Exception as e:
