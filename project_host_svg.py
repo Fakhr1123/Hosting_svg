@@ -67,12 +67,15 @@ if selected == "Detail Pending (Cashless)":
 
         @st.cache_data
         def muat_file_enc(nama_file):
-            key = st.secrets["KUNCI_EXCEL"][nama_file]
-            cipher = Fernet(key)
-            with open(nama_file, "rb") as f:
-                decrypted_data = cipher.decrypt(f.read())
-                            
-            return pd.read_excel(io.BytesIO(decrypted_data))
+            for i in range(1, 9):
+                key = st.secrets.get(f"EXCEL_RAHASIOOI_KEY_{i}")
+                if key:
+                    try:
+                        cipher = Fernet(key.encode())
+                        decrypted_data = cipher.decrypt(encrypted_data)
+                        return pd.read_excel(io.BytesIO(decrypted_data))
+                    except Exception:
+                        continue
             
         try:
             df = muat_file_enc(file_terpilih)
