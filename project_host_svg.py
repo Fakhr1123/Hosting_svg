@@ -4,6 +4,8 @@ import pandas as pd
 from st_aggrid import AgGrid, GridOptionsBuilder
 from streamlit_option_menu import option_menu
 import re
+
+
 st.set_page_config(layout="wide")
 selected = option_menu(
     menu_title="Menu",
@@ -56,14 +58,27 @@ if selected == "Detail Pending (Cashless)":
     import io, os
     import pandas as pd
     from cryptography.fernet import Fernet
-    
-    key = os.environ.get("EXCEL_RAHASIOOI_KEY").encode()
-    cipher = Fernet(key)
-    
-    with open("patient_pending.enc", "rb") as f:
-        decrypted_data = cipher.decrypt(f.read())
-    
-    df = pd.read_excel(io.BytesIO(decrypted_data))
+    daftar_file_enc = sorted([f for f in os.listdir(".") if f.endswith(".enc")])
+
+    if not daftar_file_enc:
+        st.warning("Tidak ada file Pending ditemukan")
+    else:
+        file_terpilih = st.selectbox("Pilih file Data Pending (.enc)", , options=daftar_file_enc)
+
+        @st.chace_date
+        def muat_file_enc(nama_file):
+            key = st.secrets["KUNCI_EXCEL"][nama_file]
+            cipher = Fernet(key)
+            with open(nama_file, "rb") as f:
+                decrypted_data = cipher.decrypt(f.read())
+            return pd.read_excel(io.BytesIO(decrypted_data))
+            
+         try:
+            df = muat_data_enc(file_terpilih)
+            st.success(f"Berhasil memuat: **{file_terpilih}** ({len(df)} baris)")
+            st.dataframe(df, use_container_width=True)
+        except Exception as e:
+            st.error(f"Gagal membuka file {file_terpilih}. Pastikan key sesuai. Detail: {e}")
     gb = GridOptionsBuilder.from_dataframe(df)
     gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
     gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
