@@ -57,6 +57,9 @@ if selected == "Visualisasi Data Pending (Cashless)":
 if selected == "Pivot Pending Claims Aged":
     import io, os
     from cryptography.fernet import Fernet
+    from datetime import datetime, timedelta
+    tanggal_kemarin = datetime.now() - timedelta(days=1)).strftime("%d %B %Y")
+    st.title(f"Pivot Pending Claims #update-{tanggal_kemarin}")
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
    
