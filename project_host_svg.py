@@ -122,8 +122,8 @@ if selected == "Detail Pending (Cashless)":
                 st.session_state[state_key] = True
                 st.rerun()
         else:
-            if st.button(f"sembunyikan {kategori_map[pilihan]}")
-            st.rerun()
+            if st.button(f"sembunyikan {kategori_map[pilihan]}"):
+                st.rerun()
     if st.session_state[state_key]:
         name_file = f"patient_pending_{pilihan}.enc"
         st.subheader(f"Detail Pending - {kategori_map[pilihan]}")
