@@ -54,7 +54,7 @@ if selected == "Visualisasi Data Pending (Cashless)":
     pilihan_asli = svg_files[pilihan_baru]
     # Render SVG yang dipilih
     render_svg(pilihan_asli)
-if selected == "Detail Pending (Cashless)":
+if selected == "Pivot Pending Claims Aged":
     import io, os
     from cryptography.fernet import Fernet
 
