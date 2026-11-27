@@ -87,7 +87,7 @@ if selected == "Detail Pending (Cashless)":
         options = list(kategori_map.keys()),
         format_func = lambda x: kategori_map[x],
     )
-    st.info("Pivot Aging: ***{kategori_map[pilihan]}**")
+    st.info(f"Pivot Aging: ***{kategori_map[pilihan]}**")
 
     for prefix, judul in [("pv_pending", "Pivot Table"), ("patient_pending", "Datail Pending")]:
         nama_file = f"{prefix}_{pilihan}.enc"
