@@ -87,14 +87,13 @@ if selected == "Detail Pending (Cashless)":
         options = list(kategori_map.keys()),
         format_func = lambda x: kategori_map[x],
     )
-    st.info("Pivot Aging: ***kategori_map[pilihan]**")
+    st.info("Pivot Aging: ***{kategori_map[pilihan]}**")
 
     for prefix, judul in [("pv_pending", "Pivot Table"), ("patient_pending", "Datail Pending")]:
         nama_file = f"{prefix}_{pilihan}.enc"
         st.subheader(f"{judul}-{kategori_map[pilihan]}")
     
     try:
-        df = muat_file_enc(nama_file)
         df = muat_file_enc(nama_file)
         st.success(f"Berhasil memuat: **{nama_file}** ({len(df)} baris)")
         gb = GridOptionsBuilder.from_dataframe(df)
