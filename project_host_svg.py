@@ -119,7 +119,7 @@ if selected == "Detail Pending (Cashless)":
         st.session_state[kunci] = not st.session_state[kunci]
     if st.session_state[state_key]:
         st.button(
-            f"Tampilan detail pivot-{kategori_map[pilihan]}",
+            f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
             key = f"buka button {pilihan}",
             type = "primary",
             on_click = ubah_status_detail,
@@ -127,7 +127,7 @@ if selected == "Detail Pending (Cashless)":
         )
     else:
          st.button(
-            f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
+            f"Tampilkan detail pivot-{kategori_map[pilihan]}",
             key = f"tutup button {pilihan}",
             on_click = ubah_status_detail,
             args = (state_key,),)
