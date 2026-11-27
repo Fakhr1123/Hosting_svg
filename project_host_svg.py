@@ -111,26 +111,26 @@ if selected == "Detail Pending (Cashless)":
         except Exception as e:
             st.error(f"Gagal memuat {nama_file}: {e}")
 
-    state_key = f"tampilkan_detail_pilihan"
+    state_key = f"tampilkan_detail_{pilihan}"
     if state_key not in st.session_state:
         st.session_state[state_key] = False
 
-    def ubah_status_detai(kunci):
+    def ubah_status_detail(kunci):
         st.session_state[kunci] = not st.session_state[kunci]
-        if st.session_state[state_key]:
-            st.button(
-                f"Tampilan detail pivot-{kategori_map[pilihan]}",
-                key = f"buka button {pilihan}",
-                type = "Primary",
-                on_click = ubah_status_detail,
-                args = (state_key,),
-            )
-        else:
-             st.button(
-                f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
-                key = f"tutup button {pilihan}",
-                on_click = ubah_status_detail,
-                args = (state_key,),)
+    if st.session_state[state_key]:
+        st.button(
+            f"Tampilan detail pivot-{kategori_map[pilihan]}",
+            key = f"buka button {pilihan}",
+            type = "primary",
+            on_click = ubah_status_detail,
+            args = (state_key,),
+        )
+    else:
+         st.button(
+            f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
+            key = f"tutup button {pilihan}",
+            on_click = ubah_status_detail,
+            args = (state_key,),)
             
     if st.session_state[state_key]:
         name_file = f"patient_pending_{pilihan}.enc"
@@ -151,4 +151,4 @@ if selected == "Detail Pending (Cashless)":
                 key=f"grid_{name_file}",
             )
         except Exception as e:
-            st.error(f"Gagal memuat {file_patient}: {e}")
+            st.error(f"Gagal memuat {name_file}: {e}")
