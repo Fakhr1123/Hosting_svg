@@ -87,9 +87,9 @@ if selected == "Detail Pending (Cashless)":
         options = list(kategori_map.keys()),
         format_func = lambda x: kategori_map[x],
     )
-    st.info(f"Pivot Aging: ***{kategori_map[pilihan]}**")
+    st.info(f"Pivot Aging: **{kategori_map[pilihan]}**")
 
-    for prefix, judul in [("pv_pending", "Pivot Table"), ("patient_pending", "Datail Pending")]:
+    for prefix, judul in [("pv_pending", "Pivot Table")]:
         nama_file = f"{prefix}_{pilihan}.enc"
         st.subheader(f"{judul}-{kategori_map[pilihan]}")
     
@@ -110,3 +110,37 @@ if selected == "Detail Pending (Cashless)":
             )
         except Exception as e:
             st.error(f"Gagal memuat {nama_file}: {e}")
+
+    state_key = f"tampilkan_detail_pilihan"
+    if state_key not in st.session_state:
+        st.session_state[state_key] = False
+
+    col1, col2 = st.columns([2,1])
+    with col1:
+        if not st.session_state[state_key]:
+            if st.button(f"Tampilan detail {kategori_map[pilihan]}"):
+                st.session_state[state_key] = True
+                st.rerun()
+        else:
+            if st.button(f"sembunyikan {kategori_map[pilihan]}")
+            st.rerun()
+    if st.session_state[state_key]:
+        name_file = f"patient_pending_{pilihan}.enc"
+        st.subheader(f"Detail Pending - {kategori_map[pilihan]}")
+        try:
+            df_patient = muat_file_enc(file_patient)
+            st.success(f"Berhasil memuat: **{file_patient}** ({len(df_patient)} baris)")
+            gb_pt = GridOptionsBuilder.from_dataframe(df_patient)
+            gb_pt.configure_default_column(filter=True, floatingFilter=True, resizable=True)
+            gb_pt.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
+            gridOptions_pt = gb_pt.build()
+            AgGrid(
+                df_patient,
+                gridOptions=gridOptions_pt,
+                fit_columns_on_grid_load=False,
+                height=650,
+                use_container_width=True,
+                key=f"grid_{file_patient}",
+            )
+        except Exception as e:
+            st.error(f"Gagal memuat {file_patient}: {e}")
