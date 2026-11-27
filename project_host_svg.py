@@ -128,8 +128,8 @@ if selected == "Detail Pending (Cashless)":
         name_file = f"patient_pending_{pilihan}.enc"
         st.subheader(f"Detail Pending - {kategori_map[pilihan]}")
         try:
-            df_patient = muat_file_enc(file_patient)
-            st.success(f"Berhasil memuat: **{file_patient}** ({len(df_patient)} baris)")
+            df_patient = muat_file_enc(name_file)
+            st.success(f"Berhasil memuat: **{name_file}** ({len(df_patient)} baris)")
             gb_pt = GridOptionsBuilder.from_dataframe(df_patient)
             gb_pt.configure_default_column(filter=True, floatingFilter=True, resizable=True)
             gb_pt.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
