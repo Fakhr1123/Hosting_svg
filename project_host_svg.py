@@ -115,15 +115,23 @@ if selected == "Detail Pending (Cashless)":
     if state_key not in st.session_state:
         st.session_state[state_key] = False
 
-    col1, col2 = st.columns([2,1])
-    with col1:
-        if not st.session_state[state_key]:
-            if st.button(f"Tampilan detail {kategori_map[pilihan]}"):
-                st.session_state[state_key] = True
-                st.rerun()
+    def ubah_status_detai(kunci):
+        st.session_state[kunci] = not st.session_state[kunci]
+        if st.session_state[state_key]:
+            st.button(
+                f"Tampilan detail pivot-{kategori_map[pilihan]}",
+                key = f"buka button {pilihan}",
+                type = "Primary",
+                on_click = ubah_status_detail,
+                args = (state_key,),
+            )
         else:
-            if st.button(f"sembunyikan {kategori_map[pilihan]}"):
-                st.rerun()
+             st.button(
+                f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
+                key = f"tutup button {pilihan}",
+                on_click = ubah_status_detail,
+                args = (state_key,),
+            
     if st.session_state[state_key]:
         name_file = f"patient_pending_{pilihan}.enc"
         st.subheader(f"Detail Pending - {kategori_map[pilihan]}")
