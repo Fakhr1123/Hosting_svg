@@ -130,7 +130,7 @@ if selected == "Detail Pending (Cashless)":
                 f"Sembunyikan detail pivot-{kategori_map[pilihan]}",
                 key = f"tutup button {pilihan}",
                 on_click = ubah_status_detail,
-                args = (state_key,),
+                args = (state_key,),)
             
     if st.session_state[state_key]:
         name_file = f"patient_pending_{pilihan}.enc"
