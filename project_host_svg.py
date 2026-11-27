@@ -140,7 +140,7 @@ if selected == "Detail Pending (Cashless)":
                 fit_columns_on_grid_load=False,
                 height=650,
                 use_container_width=True,
-                key=f"grid_{file_patient}",
+                key=f"grid_{name_file}",
             )
         except Exception as e:
             st.error(f"Gagal memuat {file_patient}: {e}")
