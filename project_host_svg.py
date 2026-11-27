@@ -9,7 +9,7 @@ import re
 st.set_page_config(layout="wide")
 selected = option_menu(
     menu_title="Menu",
-    options=["Visualisasi Data Pending (Cashless)", "Detail Pending (Cashless)"],
+    options=["Visualisasi Data Pending (Cashless)", "Pivot Pending Claims Aged"],
     menu_icon="columns-gap",
         icons=[        
         "gear-fill",          
