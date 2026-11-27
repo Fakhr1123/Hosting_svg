@@ -56,17 +56,18 @@ if selected == "Visualisasi Data Pending (Cashless)":
     render_svg(pilihan_asli)
 if selected == "Detail Pending (Cashless)":
     import io, os
-    import pandas as pd
     from cryptography.fernet import Fernet
-    daftar_file_enc = sorted([f for f in os.listdir(".") if f.endswith(".enc")])
 
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+   
     if not daftar_file_enc:
         st.warning("Tidak ada file Pending ditemukan")
-    else:
-        file_terpilih = st.selectbox("Pilih file Data Pending (.enc)", options=daftar_file_enc)
-
+   
         @st.cache_data
         def muat_file_enc(nama_file):
+            path_file = os.path.join(base_dir, nama_file)
+            with open (path_file, "rb") as f:
+                encrypted_data = f.read()
             for i in range(1, 9):
                 key = st.secrets.get(f"EXCEL_RAHASIOOI_KEY_{i}")
                 if key:
@@ -77,14 +78,39 @@ if selected == "Detail Pending (Cashless)":
                     except Exception:
                         continue
             
+        kategori_map = { 
+            1: "1 - Tampilkan Pivot Aging Dokumen yang Belum Diterima (Cashless)",
+            2: "2 - Tampilkan Pivot Aging Reimburse yang Pending",
+            3: "3 - Tampilkan Pivot Aging untuk Reimburse yang Belum Selesai payment/ Status 58",
+            4: "4 - Tampilkan Pivot Aging Allianz/Allisya yang belum Selesai payment/ Status 58"
+        }
+
+        pilihan = st.select_box(
+            "Pilih Pivot Pending",
+            options = list(kategori_map.keys()),
+            format_func = lambda x: kategori_map[x],
+        )
+        st.info("Pivot Aging: ***kategori_map[pilihan]**")
+
+        for prefix, judul in [("pv_pending", "Pivot Table"), ("patient_pending", "Datail Pending")]:
+            nama_file = f"{prefix}_{pilihan}.enc"
+            st.subheader(f"{judul}-{kategori_map[pilihan]}")
+        
         try:
-            df = muat_file_enc(file_terpilih)
-            st.success(f"Berhasil memuat: **{file_terpilih}** ({len(df)} baris)")
+            df = muat_file_enc(nama_file)
+            df = muat_file_enc(nama_file)
+            st.success(f"Berhasil memuat: **{nama_file}** ({len(df)} baris)")
             gb = GridOptionsBuilder.from_dataframe(df)
-            gb.configure_default_column(filter= True, floatingFilter= True, resizable = True)
+            gb.configure_default_column(filter=True, floatingFilter=True, resizable=True)
             gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
             gridOptions = gb.build()
-            AgGrid(df,gridOptions = gridOptions, fit_columns_on_grid_load = False, height = 650, use_container_width=True)
+            AgGrid(
+                df,
+                gridOptions=gridOptions,
+                fit_columns_on_grid_load=False,
+                height=650,
+                use_container_width=True,
+                key=f"grid_{nama_file}",
+            )
         except Exception as e:
-            st.error(f"Gagal membuka file {file_terpilih}. Pastikan key sesuai. Detail: {e}")
-   
+            st.error(f"Gagal memuat {nama_file}: {e}")
