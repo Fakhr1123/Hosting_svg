@@ -82,7 +82,7 @@ if selected == "Detail Pending (Cashless)":
         4: "4 - Tampilkan Pivot Aging Allianz/Allisya yang belum Selesai payment/ Status 58"
     }
 
-    pilihan = st.select_box(
+    pilihan = st.selectbox(
         "Pilih Pivot Pending",
         options = list(kategori_map.keys()),
         format_func = lambda x: kategori_map[x],
