@@ -93,20 +93,20 @@ if selected == "Detail Pending (Cashless)":
         nama_file = f"{prefix}_{pilihan}.enc"
         st.subheader(f"{judul}-{kategori_map[pilihan]}")
     
-    try:
-        df = muat_file_enc(nama_file)
-        st.success(f"Berhasil memuat: **{nama_file}** ({len(df)} baris)")
-        gb = GridOptionsBuilder.from_dataframe(df)
-        gb.configure_default_column(filter=True, floatingFilter=True, resizable=True)
-        gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
-        gridOptions = gb.build()
-        AgGrid(
-            df,
-            gridOptions=gridOptions,
-            fit_columns_on_grid_load=False,
-            height=650,
-            use_container_width=True,
-            key=f"grid_{nama_file}",
-        )
-    except Exception as e:
-        st.error(f"Gagal memuat {nama_file}: {e}")
+        try:
+            df = muat_file_enc(nama_file)
+            st.success(f"Berhasil memuat: **{nama_file}** ({len(df)} baris)")
+            gb = GridOptionsBuilder.from_dataframe(df)
+            gb.configure_default_column(filter=True, floatingFilter=True, resizable=True)
+            gb.configure_pagination(paginationAutoPageSize=False, paginationPageSize=20)
+            gridOptions = gb.build()
+            AgGrid(
+                df,
+                gridOptions=gridOptions,
+                fit_columns_on_grid_load=False,
+                height=650,
+                use_container_width=True,
+                key=f"grid_{nama_file}",
+            )
+        except Exception as e:
+            st.error(f"Gagal memuat {nama_file}: {e}")
